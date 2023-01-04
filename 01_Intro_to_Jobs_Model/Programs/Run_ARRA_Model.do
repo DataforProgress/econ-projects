@@ -42,6 +42,14 @@ local run = 0 /*1*/ /*2*/
 do ${workdir}/Programs/Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
 
 
+* Next, calculate CBO estimates of total spending by year presented in table and figure on pg. 3 of the memo
+preserve
+use ${workdir}/Data/ARRA_Spending_by_Title_and_Year, clear
+collapse (sum) spending*
+save ${workdir}/Output/ARRA_Spending_by_Year, replace
+restore
+
+
 * Cleaning the ARRA data proceeds as follows:
 
 * 1) We begin by reading in our manual categorization of spending in different titles (i.e. sections) of ARRA
@@ -413,16 +421,21 @@ reshape long Y E V Exp, i(n) j(year)
 replace year = (year-1)/10
 drop n
 
+drop Y Exp
+rename E Employment
+rename V GDP
+
+* Save final results
 save ${workdir}/Output/ARRA_Model_Run_Final_Results_`run', replace
 
-* Delete temporary files
+* Delete temporary files (found in memo under section titled "Results of Validation")
 foreach year of numlist 2009(1)2019 {
 	erase ${workdir}/Work/ARRA_Model_Run_`run'_Output_and_Employment_Results_`year'.dta
 }
 
 * Calculate "cost per job created" by dividing headline ARRA spending by job creation
 preserve
-collapse (sum) E
-gen Costperjob = 787233000000/E
+collapse (sum) Employment
+gen Costperjob = 787233000000/Employment
 dis Costperjob[1]
 restore
