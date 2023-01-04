@@ -81,9 +81,9 @@ To replicate the results in the memo, run the program called **Run_ARRA_Model.do
 The comments in this program describe the model implementation in greater detail, but after running it the final results will be saved in the **Output** folder. In particular:
 
 - **ARRA_Spending_by_Year.dta** contains CBO forecasts of ARRA spending by year reported in the table and figure on pg. 3 of the memo;
-- 
-
-
+- **ARRA_Model_Run_Final_Results_Baseline_Scenario.dta** contains results in the first table on pg. 4, which correspond to the middle lines in the figures on pg. 5;
+- **ARRA_Model_Run_Final_Results_Alt_Scenario_1.dta** contains results in the second table on pg. 4 labeled "Alternative Scenario 1: Low Parameter Values," which correspond to the bottom lines in the figures on pg. 5;
+- **ARRA_Model_Run_Final_Results_Alt_Scenario_2.dta** contains results in the second table on pg. 4 labeled "Alternative Scenario 2: High Parameter Values," which correspond to the top lines in the figures on pg. 5.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
