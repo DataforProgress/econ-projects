@@ -425,8 +425,20 @@ drop Y Exp
 rename E Employment
 rename V GDP
 
+if `run' == 0 {
+	local runname = "Alt_Scenario_1"
+}
+
+if `run' == 1 {
+	local runname = "Baseline_Scenario"
+}
+
+if `run' == 2 {
+	local runname = "Alt_Scenario_2"
+}
+
 * Save final results
-save ${workdir}/Output/ARRA_Model_Run_Final_Results_`run', replace
+save ${workdir}/Output/ARRA_Model_Run_Final_Results_`runname', replace
 
 * Delete temporary files (found in memo under section titled "Results of Validation")
 foreach year of numlist 2009(1)2019 {
