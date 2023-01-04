@@ -76,6 +76,14 @@ The repository contains the following four folders:
 
 ### Replicating Results
 
+To replicate the results in the memo, run the program called **Run_ARRA_Model.do**, which is located in the **Programs** folder. 
+<br /> <br />
+The comments in this program describe the model implementation in greater detail, but after running it the final results will be saved in the **Output** folder. In particular:
+
+- **ARRA_Spending_by_Year.dta** contains CBO forecasts of ARRA spending by year reported in the table and figure on pg. 3 of the memo;
+- 
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

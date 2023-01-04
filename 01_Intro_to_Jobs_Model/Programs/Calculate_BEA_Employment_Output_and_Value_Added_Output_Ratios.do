@@ -16,10 +16,6 @@ clear mata
 set more off
 set maxvar 100000
 
-* Set working directory
-global workdir = "/Users/Matt/Documents/Data_for_Progress/ARRA/Github"
-cd $workdir
-
 
 /********************************************************/
 /* CLEAN GROSS OUTPUT, EMPLOYMENT, AND VALUE ADDED DATA */

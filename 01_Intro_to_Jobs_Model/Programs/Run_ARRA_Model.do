@@ -9,8 +9,7 @@
 *					to obtain results for "Alternative Scenario 1," 
 *					"Baseline Scenario," or "Alternative Scenario 2,"
 *					as described below; and be sure to change working 
-*					directory in this program as well as
-*					Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
+*					directory at the top of this program
 /*************************************************************************/
 
 clear
