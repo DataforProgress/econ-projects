@@ -76,7 +76,7 @@ The repository contains the following four folders:
 
 ### Replicating Results
 
-To replicate the results in the memo, run the program called **Run_ARRA_Model.do**, which is located in the **Programs** folder. 
+To replicate the results in the memo, run the program called **Run_ARRA_Model.do**, which is located in the **Programs** folder. Be sure to change the working directory at the top of the code to reflect your own filepaths.
 <br /> <br />
 The comments in this program describe the model implementation in greater detail, but after running it the final results will be saved in the **Output** folder. In particular:
 
