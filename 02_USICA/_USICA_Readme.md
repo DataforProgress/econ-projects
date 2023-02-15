@@ -55,10 +55,6 @@
 
 The files in this repository allow for replication of the figures in the March 2022 memo entitled ["Economic Impacts of the U.S. Innovation and Competition Act."](https://www.filesforprogress.org/memos/Economic-Impacts-of-USICA.pdf) 
 
-%The purpose of the model is to allow us to make informed projections of the likely effects of different pieces of legislation on employment and GDP by relying on a technique known as *input-output (I-O) analysis*. 
-
-%As Yogi Berra once said, "it's tough to make predictions, especially about the future," so we validated the performance of our model by using it to "backcast" job creation and GDP effects of the 2009 American Reinvestment and Recovery Act (ARRA) ("the 2009 stimulus") and then comparing our results to other estimates of the law's impacts from government and academic sources. We concluded in the memo that the DFP Jobs Model is capable of generating results that are in line with these independent estimates, which should help to give confidence in our findings when applying it to analyze other legislation.
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
