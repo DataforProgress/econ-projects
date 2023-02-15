@@ -55,6 +55,9 @@
 
 The files in this repository allow for replication of the figures in the March 2022 memo entitled ["Economic Impacts of the U.S. Innovation and Competition Act."](https://www.filesforprogress.org/memos/Economic-Impacts-of-USICA.pdf) 
 
+In this memo, we made use of the Data for Progress Jobs Model to conduct a macroeconomic analysis of the United States Innovation and Competition Act (USICA), an ambitious piece of legislation designed to dramatically increase federal investments in scientific and technological research and development (R&D) that passed the Senate by a vote of 68-32 in June 2021. Portions of USICA later became law as part of the CHIPS and Science Act signed by President Biden in August 2022.
+
+Key findings from our analysis were that the appropriations provisions of USICA would have contributed between $44 billion and $51 billion per year to U.S. GDP from 2022 through 2027, and would have created or preserved a total of between 2.6 million and 3.0 million jobs over the same period.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
