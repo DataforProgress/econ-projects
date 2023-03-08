@@ -4,7 +4,7 @@
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Run_USICA_Model.do
 *  LAST UPDATED: 	2/14/23
-*  OBJECTIVE: 		
+*   		
 *  NOTES: 			Before running, set local "run" to 0, 1, or 2 to obtain
 *					results for the "Low Scenario," "Baseline Scenario," or
 *					"High Scenario," as described below; and be sure to change
@@ -233,7 +233,7 @@ matrix A = -1*(inv(Leontief)-I)
 	
 
 /**************************************************************/
-/* CALCULATE OUTPUT, EMPLOYMENT, AND WAGE EFFECTS (2022-2027) */
+/* CALCULATE OUTPUT, EMPLOYMENT, AND GDP EFFECTS (2022-2027) */
 /**************************************************************/
 
 use ${workdir}/Output/USICA_Spending_by_Industry_2022-2027, clear
@@ -294,7 +294,7 @@ foreach year of numlist 2022(1)2027 {
 	* Save expenditure vector
 	svmat Exp`year'
 	
-	* Save output, employment, and wage vectors
+	* Save output, employment, and value-added vectors
 	svmat Y`year'
 	svmat E`year'
 	svmat V`year'
@@ -372,7 +372,6 @@ restore
 collapse (sum) Y* E* V*
 gen n = _n
 reshape long Y E V Exp, i(n) j(year)
-*replace year = (year-1)/10
 drop n
 
 replace year = floor(year/10)
