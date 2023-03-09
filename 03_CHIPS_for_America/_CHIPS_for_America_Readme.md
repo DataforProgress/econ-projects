@@ -79,8 +79,8 @@ To replicate the results in the memo, run the program called **Run_CHIPS_for_Ame
 <br /> <br />
 The comments in this program describe the model implementation in greater detail, but after running it the final results will be saved in the **Output** folder. In particular:
 
-- **CHIPS_for_America_Spending_by_Fiscal_Year.dta** contains total CHIPS Act spending appropriated by USICA for each year from 2022 to 2026, as reported in Table 1 and Figure 1 on pg. 5 of the memo;
-- **CHIPS_for_America_Model_Run_Final_Results.dta** contains estimated aggregate employment effects as reported in Table 1 and Figure 1 on pg. 5 of the memo, as well as estimated aggregate effects on value added/GDP as reported in Table 3 and Figure 3 on pg. 7;
+- **CHIPS_for_America_Spending_by_Fiscal_Year.dta** contains total CHIPS Act spending appropriated by USICA for each year from 2022 to 2026, as reported in Table 1/Figure 1 on pg. 5 of the memo;
+- **CHIPS_for_America_Model_Run_Final_Results.dta** contains estimated aggregate employment effects as reported in Table 2/Figure 2 on pg. 5 of the memo, as well as estimated aggregate effects on value added/GDP as reported in Table 3/Figure 3 on pg. 7;
 - **CHIPS_for_America_Model_Run_Final_Results_by_State.dta** contains estimates of direct, indirect, induced, and total employment effects by state over the period 2022 to 2026, as reported in Table 4 pg. 9. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
