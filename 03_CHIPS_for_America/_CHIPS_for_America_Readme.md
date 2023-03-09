@@ -19,11 +19,9 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Replication Repository for ``Economic Impacts of the CHIPS for America Act" (May 2022) by Matt Mazewski and Christian Flores</h2>
+<h2 align="center">Replication Repository for <br /> "Economic Impacts of the CHIPS for America Act" (May 2022) <br /> by Matt Mazewski and Christian Flores</h2>
   <p align="center">
-    Readme author: Matt Mazewski and Christian Flores
-    <br />
-    Readme date: March 2023
+    Readme by Matt Mazewski (March 2023)
     <br />
   </p>
 </div>
