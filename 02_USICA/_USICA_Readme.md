@@ -19,11 +19,9 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Economic Impacts of the U.S. Innovation and Competition Act</h2>
+<h2 align="center">Replication Repository for "Economic Impacts of the US Innovation and Competition Act" (March 2022) <br /> by Matt Mazewski and Christian Flores</h2>
   <p align="center">
-    Matt Mazewski
-    <br />
-    February 2023
+    Readme by Matt Mazewski (February 2023)
     <br />
   </p>
 </div>
