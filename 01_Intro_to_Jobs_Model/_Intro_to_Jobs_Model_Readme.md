@@ -19,11 +19,9 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Introduction to the Data for Progress Jobs Model</h2>
+<h2 align="center">Replication Repository for "Economic Impacts of the US Innovation and Competition Act" (February 2022) <br /> by Matt Mazewski </h2>
   <p align="center">
-    Matt Mazewski
-    <br />
-    January 2023
+    Readme by Matt Mazewski (January 2023)
     <br />
   </p>
 </div>
