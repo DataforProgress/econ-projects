@@ -452,6 +452,7 @@ drop year Employment GDP S20221 S20231 S20241 S20251 S20261 S20271
 
 rename S Employment
 
+* Merge in state employment totals and FIPS codes
 gen n = _n
 merge 1:1 n using ${workdir}/Work/State_Industry_Employment
 drop _merge
