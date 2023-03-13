@@ -51,7 +51,7 @@
 <!-- ABOUT -->
 ## About
 
-The files in this repository allow for replication of the figures in the May 2022 memo entitled ["Economic Impacts of the CHIPS for America Act."](https://www.filesforprogress.org/memos/Economic-Impacts-of-USICA.pdf) 
+The files in this repository allow for replication of the figures in the May 2022 memo entitled ["Economic Impacts of the CHIPS for America Act."](https://www.filesforprogress.org/memos/USICA_Semiconductors.pdf) 
 
 In this memo, we made use of the Data for Progress Jobs Model to conduct a macroeconomic analysis of the Creating Helpful Incentives to Produce Semiconductors (CHIPS) for America Act, which was enacted by Congress in January 2021 and which would have been funded through several emergency appropriations provisions of the United States Innovation and Competition Act (USICA), which passed the Senate by a vote of 68-32 in June 2021 but was never reconciled with its companion bill in the House. However, much of this funding was ultimately included in the CHIPS and Science Act signed by President Biden in August 2022.
 
