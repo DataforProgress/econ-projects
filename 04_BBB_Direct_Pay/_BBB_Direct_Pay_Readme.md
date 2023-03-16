@@ -52,7 +52,7 @@
 ## About
 
 The files in this repository allow for replication of the figures in the June 2022 memo entitled ["Measuring the Economic Benefits
-of the Build Back Better Agenda?s Direct Pay Provisions."](https://www.filesforprogress.org/memos/MEMO_DirectPay2.pdf) 
+of the Build Back Better Agenda's Direct Pay Provisions."](https://www.filesforprogress.org/memos/MEMO_DirectPay2.pdf) 
 
 In recognition of the fact that administrative and bureaucratic barriers have often made it difficult for many individuals and firms to take full advantage of federal clean energy tax credits, the proposals comprising President Biden's Build Back Better (BBB) agenda not only included expansions and extensions of existing green incentives but also sought to increase their use by reviving a mechanism known as Direct Pay. Modeled on an earlier initiative under the 2009 American Recovery and Reinvestment Act (ARRA), Direct Pay would allow tax credits to be paid out as cash rather than simply as reductions
 in incurred tax liability. (The Inflation Reduction Act enacted by Congress in August 2022, which contained many of the earlier elements of BBB, featured a more scaled-back version of Direct Pay with eligibility limited to nonprofits, rural electric cooperatives, and state, local, and tribal governments.)
