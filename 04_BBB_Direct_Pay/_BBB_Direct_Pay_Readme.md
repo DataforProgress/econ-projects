@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Measuring the Economic Benefits of the Build Back Better Agenda?s Direct Pay Provisions" (June 2022) <br /> by Matt Mazewski and Christian Flores</h2>
+<h2 align="center">Measuring the Economic Benefits of the Build Back Better Agenda's <br /> Direct Pay Provisions" (June 2022) <br /> by Matt Mazewski and Christian Flores</h2>
   <p align="center">
     Readme by Matt Mazewski (March 2023)
     <br />
