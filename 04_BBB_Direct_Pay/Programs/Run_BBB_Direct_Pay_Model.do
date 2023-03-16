@@ -124,12 +124,6 @@ keep Abbreviation Spending2022_2031
 save ${workdir}/Output/BBB_Direct_Pay_Total_Spending_by_Credit, replace
 restore
 
-* Calculate nominal spending by year (in billions)
-preserve
-collapse (sum) Spending*
-save ${workdir}/Output/BBB_Direct_Pay_Total_Spending_by_Fiscal_Year, replace
-restore
-
 
 * Convert to 2020 dollars
 
