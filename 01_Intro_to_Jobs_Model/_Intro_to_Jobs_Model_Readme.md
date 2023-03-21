@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Replication Repository for "Economic Impacts of the US Innovation and Competition Act" (February 2022) <br /> by Matt Mazewski </h2>
+<h2 align="center">Replication Repository for "Introduction to the Data for Progress Jobs Model" (February 2022) <br /> by Matt Mazewski </h2>
   <p align="center">
     Readme by Matt Mazewski (January 2023)
     <br />
