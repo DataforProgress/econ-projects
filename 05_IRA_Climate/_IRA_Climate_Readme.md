@@ -51,9 +51,9 @@
 <!-- ABOUT -->
 ## About
 
-The files in this repository allow for replication of the figures in the January 2023 memo entitled ["Economic Impacts of the Inflation Reduction Act?s Climate and Energy Provisions."](https://www.filesforprogress.org/memos/IRA-Climate-Jobs-Memo.pdf) 
+The files in this repository allow for replication of the figures in the January 2023 memo entitled ["Economic Impacts of the Inflation Reduction Act's Climate and Energy Provisions."](https://www.filesforprogress.org/memos/IRA-Climate-Jobs-Memo.pdf) 
 
-In this memo, we employed the Data for Progress Jobs Model to project the output and employment effects of these provisions of the IRA, which was signed into law by President Biden on August 16, 2022. In addition to the many other significant changes it makes to federal tax policy, healthcare, and more, this landmark legislation constitutes the biggest climate investment in U.S. history. It aims to accelerate domestic clean energy production, catalyze technological innovation, and reduce greenhouse gas (GHG) emissions.
+In this memo, we employed the Data for Progress Jobs Model to project the output and employment effects of these provisions of the IRA, which was signed into law by President Biden on August 16, 2022. In addition to the many other significant changes it makes to federal tax policy, healthcare, and more, this landmark legislation constitutes the biggest climate investment in U.S. history and aims to accelerate domestic clean energy production, catalyze technological innovation, and reduce greenhouse gas (GHG) emissions.
 
 Assuming that future Congresses appropriate funds at the levels authorized by the law, our analysis found that the spending contained in the climate and energy provisions of the IRA, together with the private investment that it would incentivize and support, would be responsible for an average of around 1 million jobs created or preserved from 2023 to 2032, and would contribute approximately $1.7 trillion to U.S. GDP over the same period. We further found that nearly 50 percent of these jobs would be concentrated in the construction and manufacturing sectors, with environmental remediation, agriculture and forestry,
 and scientific and technical services accounting for significant portions of the overall employment impacts as well.
@@ -80,11 +80,11 @@ To replicate the results in the memo, run the program called **Run_IRA_Climate_M
 <br /> <br />
 The comments in this program describe the model implementation in greater detail, but after running it the final results will be saved in the **Output** folder. In particular:
 
-- **IRA_Climate_Total_Spending_by_Fiscal_Year_and_Category.dta** contains total expenditures on the climate and energy provisions of the IRA, as reported in Table 1a on pg. 4 and Figure 1a on pg. 5 of the memo and Table 1b/Figure 1b on pg. 6;
+- **IRA_Climate_Total_Spending_by_Fiscal_Year_and_Category.dta** contains total expenditures authorized by the climate and energy provisions of the IRA, as reported in Table 1a on pg. 4 and Figure 1a on pg. 5 of the memo and Table 1b/Figure 1b on pg. 6;
 
 - **IRA_Climate_Model_Run_Final_Results_Employment.dta** contains estimates of the average number of direct, indirect, induced, and total jobs created or preserved nationally over the period 2023 to 2032, as reported in Table 2 on pg. 7;
 
-- **IRA_Climate_Model_Run_Final_Results_GDP.dta** contains estimates of the ESTIMATES OF THE GDP nationally over the period 2023 to 2032, as reported in Table 3/Figure 2 on pg. 8;
+- **IRA_Climate_Model_Run_Final_Results_GDP.dta** contains estimates of the aggregate effects on U.S. GDP over the period 2023 to 2032, as reported in Table 3/Figure 2 on pg. 8;
 
 - **IRA_Climate_Model_Run_Final_Results_by_Sector.dta** contains estimates of the average number of jobs created or preserved by sector over the period 2023 to 2032, as reported in Table 4 on pg. 9 (top five sectors) and Appendix E on pg. 17 (all twenty sectors);
 
@@ -92,7 +92,7 @@ The comments in this program describe the model implementation in greater detail
 
 - **IRA_Climate_Model_Run_Final_Results_Averages_by_Category.dta** contains estimates of the average number of jobs created or preserved by category over the period 2023 to 2032, as reported in Table 6 on pg. 10.
 
-- **IRA_Climate_Total_Spending_by_Category_and_Section** contains a complete list of climate and energy expenditures in the Inflation Reduction Act by bill section, as reported in Appendix F on pg. 18. Note that the amounts in this table are taken from Congressional Budget Office (2022), "Estimated Budgetary Effects of H.R. 5376, the Inflation Reduction Act of 2022," and refer to what we call "public spending," i.e. only federal expenditures excluding any partner matches or private spending that might be incentivized by public programs. This corresponds to what the CBO terms "estimated budgetary impacts" or "estimated
+- **IRA_Climate_Total_Spending_by_Category_and_Section.dta** contains a complete list of climate and energy expenditures in the Inflation Reduction Act by bill section, as reported in Appendix F on pg. 18. Note that the amounts in this table are taken from Congressional Budget Office (2022), ["Estimated Budgetary Effects of H.R. 5376, the Inflation Reduction Act of 2022,"](https://www.cbo.gov/publication/58366) and refer to what we call "public spending," i.e. federal expenditures excluding any partner matches or private spending that might be incentivized by public programs. This corresponds to what the CBO terms "estimated budgetary impacts" or "estimated
 outlays," and often but does not always coincide with the amounts authorized by the law.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
