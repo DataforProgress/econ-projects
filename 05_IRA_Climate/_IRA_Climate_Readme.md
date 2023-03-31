@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Replication Repository for "Economic Impacts of the Inflation Reduction Act's Climate and Energy Provisions" (January 2023) <br /> by Adewale Maye and Matt Mazewski</h2>
+<h2 align="center">Replication Repository for "Economic Impacts of the Inflation Reduction Act's <br /> Climate and Energy Provisions" (January 2023) <br /> by Adewale Maye and Matt Mazewski</h2>
   <p align="center">
     Readme by Matt Mazewski (March 2023)
     <br />
