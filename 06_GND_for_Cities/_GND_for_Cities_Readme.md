@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-<h2 align="center">Replication Repository for "Economic Impacts of the Green New Deal for Cities Act" (April 2023) <br /> by Adewale Maye and Matt Mazewski</h2>
+<h2 align="center">Replication Repository for "Economic Impacts of the <br /> Green New Deal for Cities Act" (April 2023) <br /> by Adewale Maye and Matt Mazewski</h2>
   <p align="center">
     Readme by Matt Mazewski (May 2023)
     <br />
