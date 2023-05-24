@@ -63,15 +63,17 @@ do ${programsdir}/Clean_Domestic_Requirements_Table_2021.do
 /* DEFINE SYNTHETIC INDUSTRIES AND CREATE SPENDING VECTORS */
 /***********************************************************/
 
-* In order to feed expenditures on renewables into the model we need to make assumptions about 
-* how the total expenditures should be allocated across industries, for which we draw on the 
-* "synthetic industry" approach (c.f. Garrett-Peltier (2016), "Green versus brown: Comparing the
-* employment impacts of energy efficiency, renewable energy, and fossil fuels using an input-output 
-* model," Economic Modelling 61)
+* In order to feed expenditures on renewables into the model we need to make 
+* assumptions about how these should be allocated across industries. For this
+* we draw on the "synthetic industry" approach (c.f. Garrett-Peltier (2016), 
+* "Green versus brown: Comparing the employment impacts of energy efficiency, 
+* renewable energy, and fossil fuels using an input-output model," Economic 
+* Modelling 61)
 
-* Using this technique and the references in Garrett-Peltier (2016), we construct vectors
-* of weights that describe how a dollar of spending on different synthetic industries
-* should be allocated across the industries that are observable in the BEA I-O tables
+* Using this technique and the references in Garrett-Peltier (2016), we 
+* construct vectors of weights that describe how a dollar of spending on 
+* different synthetic industries should be allocated across the industries that 
+* are observable in the BEA I-O tables
 
 * Bioenergy (Pollin et al. 2015)
 matrix BioenergyP = J(71,1,0)
