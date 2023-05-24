@@ -5,7 +5,10 @@
 *  PROGRAM NAME:   	Run_GND_for_Cities_Model.do
 *  LAST UPDATED: 	5/23/23
 *
-*  NOTES: 			Calls the following programs:
+*  NOTES: 			Before running, be sure to change the working directory 
+*					at the top of this program
+*
+*					Calls the following programs:
 *					- Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
 *					- Clean_Domestic_Requirements_Table_2021.do
 *					- Calculate_Sector_Employment.do
