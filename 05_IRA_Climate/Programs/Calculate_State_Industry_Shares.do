@@ -3,14 +3,20 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Calculate_State_Industry_Shares.do
-*  LAST UPDATED: 	3/18/23
+*  LAST UPDATED: 	5/24/23
 *
 *  NOTES: 			Calculates the share of each state's employment in
 *					each BEA industry, as measured in the 2019 American
 *					Community Survey (ACS)	
+*
 /*************************************************************************/
 
-use ${datadir}/ACS_Extract_2019_Full.dta, clear
+clear
+set more off
+
+cd $workdir
+
+use ${datadir}/ACS_Extract_2019_for_IRA_Climate.dta, clear
 
 merge m:1 ind using ${datadir}/BEA_Naics_Census_Ind_Code_Bridge
 drop if _merge == 2
@@ -25,13 +31,12 @@ collapse (sum) pop, by(statefip bea_naics)
 preserve
 collapse (sum) pop, by(statefip)
 gen n = _n
-save ${datadir}/State_Employment, replace
+save ${workdir}/State_Industry_Employment, replace
 restore
 
 bys bea_naics (statefip): egen bea_naics_total = sum(pop)
 
 gen state_share = pop / bea_naics_total
-*gen male_share = pop_male / pop
 
 merge 1:m statefip bea_naics using ${datadir}/IOCode_BEA_Naics_Bridge
 

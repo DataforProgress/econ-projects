@@ -3,8 +3,8 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Clean_Domestic_Requirements_Table_2021.do
-*  LAST UPDATED: 	11/1/22
-*  NOTES: 			
+*  LAST UPDATED: 	5/24/23
+*  	
 /*************************************************************************/
 
 import excel using ${datadir}/BEA_Industry_by_Industry_Domestic_Requirements_2021.xlsx, clear

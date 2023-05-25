@@ -3,8 +3,8 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
-*  LAST UPDATED: 	3/18/23
-*  NOTES: 			
+*  LAST UPDATED: 	5/24/23
+*  
 /***********************************************************************************/
 
 clear
@@ -237,7 +237,6 @@ drop _merge
 sort indnum
 
 * Pool HS and ORE to calculate EO ratio (employment was all in one so we divide it by 2)
-*replace employment = 0 if iocode == "ORE"
 gen realestate = 0
 replace realestate = 1 if inlist(iocode,"HS","ORE")
 bys realestate (indnum): egen employment2 = sum(employment)

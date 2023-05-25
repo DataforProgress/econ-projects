@@ -3,12 +3,15 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Allocate_Jobs_Across_States.do
-*  LAST UPDATED: 	2/15/23
-*  NOTES: 			
+*  LAST UPDATED: 	5/24/23
 *					
 /*************************************************************************/
 
-* Clean IRA Climate spending
+/**********************************/
+/* CALCULATE SPENDING BY INDUSTRY */
+/**********************************/
+
+* Clean IRA climate spending
 import excel using ${datadir}/IRA_Climate_Industry_Coding.xlsx, firstrow clear
 
 rename I Spending2023
@@ -33,6 +36,20 @@ foreach year of numlist 2023(1)2032 {
 }
 
 drop Weight
+
+
+/**************************************************************/
+/* DEFINE ALLOCATION GROUPS AND RUN MODEL SEPARATELY FOR EACH */
+/**************************************************************/
+
+* For those sections of the IRA with provisions specifying how funds will be
+* distributed geographically, we allocate at least part of the associated direct 
+* jobs in proportion to the allocation of these funds
+
+* To make the calculations tractable we divide up the sections of the IRA into 
+* groups based on methodology for allocating funds, with "Allocation 0" denoting
+* those sections that have no specific provisions regarding geographic distribution
+* of funds and "Allocations 1-9" the others
 
 gen Allocation = 0
 
@@ -68,6 +85,8 @@ replace Allocation = 8 if inlist(Section,"13501")
 * Allocation to Hawaii
 replace Allocation = 9 if inlist(Section,"80002")
 
+
+* Loop over ten allocation groups and run model separately for each:
 
 foreach allocationnum of numlist 0(1)9 {
 		
@@ -124,6 +143,8 @@ foreach allocationnum of numlist 0(1)9 {
 foreach allocationnum of numlist 0(1)9 {
 	
 	use ${workdir}/IRA_Climate_Spending_by_Industry_Allocation_`allocationnum', clear
+	
+	* Construct vectors of spending on synthetic industries
 	
 	foreach year of numlist 2023(1)2032 {
 	
@@ -300,12 +321,6 @@ foreach allocationnum of numlist 0(1)9 {
 	gen Indirect = E - D
 
 	save ${workdir}/IRA_Climate_Model_Run_Final_Results_Allocation_`allocationnum', replace
-	
-	*collapse (mean) *
-
-	*drop year
-	
-	*save ${workdir}/IRA_Climate_Model_Run_Final_Results_Averages_Allocation_`allocationnum', replace
 	
 }
 

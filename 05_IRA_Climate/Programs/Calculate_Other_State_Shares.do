@@ -3,9 +3,8 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Calculate_Other_State_Shares.do
-*  LAST UPDATED: 	3/19/23
-*
-*  NOTES: 							
+*  LAST UPDATED: 	5/24/23
+*					
 /*************************************************************************/
 
 /*********************************************************/
@@ -552,7 +551,7 @@ save ${workdir}/State_Tribal_Pop_Shares, replace
 /* Calculate industry shares by state, weighting by state non-MSA population shares */
 /************************************************************************************/
 
-use ${datadir}/ACS_Extract_2019_Full.dta, clear
+use ${datadir}/ACS_Extract_2019_for_IRA_Climate.dta, clear
 
 merge m:1 ind using ${datadir}/BEA_Naics_Census_Ind_Code_Bridge
 drop if _merge == 2
@@ -835,7 +834,7 @@ save ${workdir}/State_Industry_Non-MSA_Population_Weighted_Shares, replace
 /* Calculate industry shares by state, weighting by state non-MSA population shares */
 /************************************************************************************/
 
-use ${datadir}/ACS_Extract_2019_Full.dta, clear
+use ${datadir}/ACS_Extract_2019_for_IRA_Climate.dta, clear
 
 merge m:1 ind using ${datadir}/BEA_Naics_Census_Ind_Code_Bridge
 drop if _merge == 2
@@ -1118,7 +1117,7 @@ save ${workdir}/State_Industry_Poverty_Population_Weighted_Shares, replace
 /* Save 48C spending shares */
 /****************************/
 
-use ${datadir}/ACS_Extract_2019_Full.dta, clear
+use ${datadir}/ACS_Extract_2019_for_IRA_Climate.dta, clear
 
 merge m:1 ind using ${datadir}/BEA_Naics_Census_Ind_Code_Bridge
 drop if _merge == 2

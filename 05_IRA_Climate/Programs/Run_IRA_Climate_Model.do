@@ -1,13 +1,30 @@
 
-/*************************************************************************/
+/***********************************************************************************************/
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Run_IRA_Climate_Model.do
-*  LAST UPDATED: 	3/19/23
+*  LAST UPDATED: 	5/24/23
 *
 *  NOTES: 			Before running, be sure to change the working directory 
-*					at the top of this program			
-/*************************************************************************/
+*					at the top of this program		
+*
+*					Calls the following programs:
+*					- Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
+*					- Clean_Domestic_Requirements_Table_2021.do
+*					- Calculate_Output_and_Employment_Effects_by_Category.do
+*					- Calculate_State_Industry_Shares.do
+*					- Calculate_Other_State_Shares.do
+*					- Allocate_Jobs_Across_States.do
+*
+*					Jobs are allocated across states using the following procedure:
+* 					- Indirect/induced jobs are allocated in proportion to state employment in 
+*					every industry as measured in 2021 ACS;
+* 					- Direct jobs are allocated in the same way for those sections of the bill
+* 					that do not specify how funds will be distributed geographically; for those
+* 					that do have such stipulations, we allocate direct jobs as described in
+*					greater detail below
+*
+/***********************************************************************************************/
 
 clear
 clear matrix
@@ -29,7 +46,15 @@ cd $workdir
 /* RUN OTHER NEEDED PROGRAMS */
 /*****************************/
 
+* First, call program that cleans BEA data on employment, output, and value-added by industry
+* Generates ratios needed for model implementation below
+
 do ${programsdir}/Calculate_BEA_Employment_Output_and_Value_Added_Output_Ratios.do
+
+
+* Next, call program that cleans 2021 "domestic requirements table" from BEA
+* Generates variables needed to construct input-output matrix below
+
 do ${programsdir}/Clean_Domestic_Requirements_Table_2021.do
 
 
@@ -37,7 +62,7 @@ do ${programsdir}/Clean_Domestic_Requirements_Table_2021.do
 /* CALCULATE SPENDING BY INDUSTRY */
 /**********************************/
 
-* Clean IRA Climate spending
+* Clean IRA climate spending
 import excel using ${datadir}/IRA_Climate_Industry_Coding.xlsx, firstrow clear
 
 rename I Spending2023
@@ -115,10 +140,6 @@ rename IndustryCode beaiocodes
 * - 163.8025303 in 2031
 * - 168.7166062 in 2032
 
-* Assign any 2022 spending to 2023
-*replace Spending2023 = Spending2022 + Spending2023
-*drop Spending2022
-
 rename SpendingTot2023 Spending2023
 rename SpendingTot2024 Spending2024
 rename SpendingTot2025 Spending2025
@@ -143,9 +164,6 @@ replace Spending2030 = Spending2030 / (159.0315828/117.021)
 replace Spending2031 = Spending2031 / (163.8025303/117.021)
 replace Spending2032 = Spending2032 / (168.7166062/117.021)
 
-
-* Generate spending vectors
-
 merge 1:1 beaiocodes using ${datadir}/All_BEAIOCodes.dta
 sort num
 drop _merge
@@ -154,8 +172,6 @@ foreach year of numlist 2023(1)2032 {
 	replace Spending`year' = 0 if Spending`year' == .
 }
 
-*drop if _n > 71
-
 save ${workdir}/IRA_Climate_Spending_by_Industry, replace
 
 
@@ -163,7 +179,7 @@ save ${workdir}/IRA_Climate_Spending_by_Industry, replace
 /* CALCULATE SPENDING BY INDUSTRY AND CATEGORY */
 /***********************************************/
 
-* Clean IRA Climate spending
+* Clean IRA climate spending
 import excel using ${datadir}/IRA_Climate_Industry_Coding.xlsx, firstrow clear
 
 rename I Spending2023
@@ -249,10 +265,6 @@ foreach categorynum of numlist 1(1)7 {
 	* - 159.0315828 in 2030
 	* - 163.8025303 in 2031
 	* - 168.7166062 in 2032
-	
-	* Assign any 2022 spending to 2023
-	*replace Spending2023 = Spending2022 + Spending2023
-	*drop Spending2022
 
 	rename SpendingTot2023 Spending2023
 	rename SpendingTot2024 Spending2024
@@ -277,8 +289,6 @@ foreach categorynum of numlist 1(1)7 {
 	replace Spending2030 = Spending2030 / (159.0315828/117.021)
 	replace Spending2031 = Spending2031 / (163.8025303/117.021)
 	replace Spending2032 = Spending2032 / (168.7166062/117.021)
-	
-	* Generate spending vectors
 
 	merge 1:1 beaiocodes using ${datadir}/All_BEAIOCodes.dta
 	sort num
@@ -288,8 +298,6 @@ foreach categorynum of numlist 1(1)7 {
 		replace Spending`year' = 0 if Spending`year' == .
 	}
 
-	*drop if _n > 71
-
 	save ${workdir}/IRA_Climate_Spending_by_Industry_Category_`categorynum', replace
 
 	restore
@@ -297,9 +305,21 @@ foreach categorynum of numlist 1(1)7 {
 }
 
 
-/****************************/
-/* CREATE VECTORS OF INPUTS */
-/****************************/
+/***********************************************************/
+/* DEFINE SYNTHETIC INDUSTRIES AND CREATE SPENDING VECTORS */
+/***********************************************************/
+
+* In order to feed expenditures on renewables into the model we need to make 
+* assumptions about how these should be allocated across industries. For this
+* we draw on the "synthetic industry" approach (c.f. Garrett-Peltier (2016), 
+* "Green versus brown: Comparing the employment impacts of energy efficiency, 
+* renewable energy, and fossil fuels using an input-output model," Economic 
+* Modelling 61)
+
+* Using this technique and the references in Garrett-Peltier (2016), we 
+* construct vectors of weights that describe how a dollar of spending on 
+* different synthetic industries should be allocated across the industries that 
+* are observable in the BEA I-O tables
 
 * Bioenergy (Pollin et al. 2015)
 matrix BioenergyP = J(71,1,0)
@@ -343,7 +363,9 @@ matrix HydroP[12,1] = 0.070 /* Machinery */
 matrix HydroP[14,1] = 0.140 /* Electrical equipment, appliances, and components */
 matrix HydroP[53,1] = 0.430 /* Miscellaneous professional, scientific, and technical services */
 
-* Nuclear (Made this ourselves from B&V 2012)
+* Nuclear (Authors' calculations ased on Black and Veatch 2012, "Cost and 
+* Performance Data for Power Generation Technologies: Prepared for the National 
+* Renewable Energy Laboratory," pg. 11)
 matrix Nuclear = J(71,1,0)
 matrix Nuclear[7,1] = 0.25 /* Construction */
 matrix Nuclear[11,1] = 0.10 /* Fabricated metal products */
@@ -392,12 +414,11 @@ matrix Wind[14,1] = 0.03 /* Electrical equipment, appliances, and components */
 matrix Wind[26,1] = 0.12 /* Plastics and rubber products */
 matrix Wind[53,1] = 0.07 /* Miscellaneous professional, scientific and technical services */
 
-
-* Other Non-renewables (Made this ourselves - 25% coal, 50% oil and gas, 25% nuclear)
+* Other Non-renewables (Authors' calculations)
 matrix Nonrenewables = J(71,1,0)
 matrix Nonrenewables = 0.25*Coal + 0.25*Nuclear + 0.5*OilGas
 
-* Other Renewables - old version (Made this ourselves - 20% wind, 20% solar, 20% biomass, 20% geothermal (Pollin), 20% hydro (Pollin))
+* Other Renewables (Authors' calculations)
 matrix Renewables = J(71,1,0)
 matrix Renewables = 0.2*Biomass + 0.2*GeothermalP + 0.2*HydroP + 0.2*Solar + 0.2*Wind
 
@@ -734,6 +755,9 @@ restore
 /* CALCULATE OUTPUT AND EMPLOYMENT EFFECTS BY CATEGORY (2023-2032) */
 /*******************************************************************/
 
+* Call program that runs model separately for each of seven major categories
+* of climate-related spending in the IRA
+
 do ${programsdir}/Calculate_Output_and_Employment_Effects_by_Category.do
 
 
@@ -741,47 +765,68 @@ do ${programsdir}/Calculate_Output_and_Employment_Effects_by_Category.do
 /* ALLOCATE JOBS ACROSS STATES */
 /*******************************/
 
-* Allocation notes:
+* Jobs are allocated across states using the following procedure:
+*
+* - Indirect/induced jobs are allocated in proportion to state employment in 
+*   every industry as measured in 2021 ACS;
+* - Direct jobs are allocated in the same way for those sections of the bill
+*   that do not specify how funds will be distributed geographically; for those
+*   that do have such stipulations, we allocate direct jobs as described below:
+*
+*  1. Clean Electricity and Transmission
+*  -- 22004 (Rural Electric Cooperative Loans): allocate direct jobs in proportion to non-MSA population
+*  -- 50145 (Tribal Energy Loan Guarantee Program): allocate direct jobs in proportion to state tribal populations
 
-* [First off, explain that we ignore the energy community thing because it doesn't seem feasible to implement]
+*  2. Clean Transportation
+*  -- 13404 (EV Charging/Alternative Fuels Tax Credit): allocate direct jobs in proportion to non-MSA population
+*  -- 22002 (Rural Energy for America Program): allocate 50% of direct jobs in proportion to non-MSA population
+*  -- 60102 (Clean Ports): allocate direct jobs in proportion to miles of coastline
+*  -- 60501 (Neighborhood Access and Equity Grants Program): allocate 50.73% (1.262/3.205) in proportion to "disadvantaged"/low-income population
 
-* 1. Clean Electricity and Transmission
-* - 22004 (Rural Electric Cooperative Loans): allocate direct jobs in proportion to non-MSA population
-* - 50145 (Tribal Energy Loan Guarantee Program): allocate direct jobs in proportion to state tribal populations
+*  3. Buildings and Energy Efficiency
+*  -- 50122 (High-efficiency electric home rebate program): allocate 5% of direct jobs in proportion to state tribal populations
 
-* 2. Clean Transportation
-* - 13404 (EV Charging/Alternative Fuels Tax Credit): allocate direct jobs in proportion to non-MSA population
-* - 22002 (Rural Energy for America Program): allocate 50% of direct jobs in proportion to non-MSA population
-* - 60102 (Clean Ports): allocate direct jobs in proportion to miles of coastline
-* - 60501 (Neighborhood Access and Equity Grants Program): allocate 50.73% (1.262/3.205) in proportion to "disadvantaged"/low-income population
+*  4. Manufacturing
+*  -- 13501 (Clean Manufacturing Investment Tax Credit (48C)): allocate 60% of direct jobs in proportion to 48C Census tracts
 
-* 3. Buildings and Energy Efficiency
-* - 50122 (High-efficiency electric home rebate program): allocate 5% of direct jobs in proportion to state tribal populations
+*  5. Environmental Justice
+*  -- 60103 (Clean Energy Fund): allocate 55.55% (15/27) of direct jobs in proportion to "disadvantaged"/low-income population
+*  -- 80001 (Tribal Climate Resilience): allocate direct jobs in proportion to state tribal populations
+*  -- 80002 (Native Hawaiian Climate Resilience): allocate direct jobs to Hawaii
+*  -- 80003 (Tribal Electrification Program): allocate direct jobs in proportion to state tribal populations
+*  -- 80004 (Emergency Drought Relief for Tribes): allocate direct jobs in proportion to state tribal populations
 
-* 4. Manufacturing
-* - 13501 (Clean Manufacturing Investment Tax Credit (48C)): allocate 60% of direct jobs in proportion to 48C Census tracts
+*  6. Conservation and Agriculture
+*  -- 40001 (Coastal Climate Resilience): allocate direct jobs in proportion to miles of coastline
+*
+*   (Note that we do not attempt to model the geographic impact of provisions in
+*   certain sections of the IRA that target spending at "energy communities,"
+*   since this term appears to be subject to definitional ambiguity that will
+*   likely be resolved through future guidance from the Treasury Department. 
+*   See Daniel Raimi and Sophie Pesek (September 7, 2022), "What Is An 
+*   Energy Community?" Available at 
+*   https://www.resources.org/common-resources/what-is-an-energy-community/)
+*
 
-* 5. Environmental Justice
-* - 60103 (Clean Energy Fund): allocate 55.55% (15/27) of direct jobs in proportion to "disadvantaged"/low-income population
-* - 80001 (Tribal Climate Resilience): allocate direct jobs in proportion to state tribal populations
-* - 80002 (Native Hawaiian Climate Resilience): allocate direct jobs to Hawaii
-* - 80003 (Tribal Electrification Program): allocate direct jobs in proportion to state tribal populations
-* - 80004 (Emergency Drought Relief for Tribes): allocate direct jobs in proportion to state tribal populations
 
-* 6. Conservation and Agriculture
-* - 40001 (Coastal Climate Resilience): allocate direct jobs in proportion to miles of coastline
-
-
-* Run other programs needed for allocation
+* Calculate the share of each state's employment in each BEA industry, 
+* as measured in the 2021 American Community Survey (ACS)
 
 preserve
 do ${programsdir}/Calculate_State_Industry_Shares.do
 restore
 
+
+* Calculate other shares needed to allocate direct jobs associated with
+* provisions containing stipulations about how funds are distributed 
+* geographically, e.g. state tribal population shares
+
 preserve
 do ${programsdir}/Calculate_Other_State_Shares.do
 restore
 
+
+* Run program that performs actual allocation of jobs across states
 do ${programsdir}/Allocate_Jobs_Across_States.do
 
 
@@ -789,7 +834,7 @@ do ${programsdir}/Allocate_Jobs_Across_States.do
 /* CALCULATE FINAL RESULTS BY STATE */
 /************************************/
 
-* Append results
+* Append results from component allocations performed by Allocate_Jobs_Across_States.do
 
 use ${workdir}/IRA_Climate_Model_Run_Final_Results_by_State_Allocation_0, clear
 
@@ -804,6 +849,9 @@ append using ${workdir}/IRA_Climate_Model_Run_Final_Results_by_State_Allocation_
 append using ${workdir}/IRA_Climate_Model_Run_Final_Results_by_State_Allocation_9
 
 keep SDAvg SIndirectAvg SInducedAvg SAvg Allocation
+
+
+* Reshape data and sum across allocations to obtain final results by state
 
 gen index = mod(_n,51)
 replace index = 51 if index == 0
@@ -879,6 +927,7 @@ keep statefip EmploymentDirectAvg EmploymentIndirectAvg EmploymentInducedAvg Emp
 order statefip EmploymentDirectAvg EmploymentIndirectAvg EmploymentInducedAvg EmploymentAvg
 
 save ${outputdir}/IRA_Climate_Model_Run_Final_Results_by_State, replace
+
 
 * Delete temporary files
 

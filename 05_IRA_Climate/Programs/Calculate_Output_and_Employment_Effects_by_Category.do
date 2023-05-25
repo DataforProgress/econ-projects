@@ -3,15 +3,25 @@
 *  PROJECT:    		IRA Climate Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Calculate_Output_and_Employment_Effects_by_Category.do
-*  LAST UPDATED: 	3/18/23
-*  NOTES: 			
+*  LAST UPDATED: 	5/24/23	
 *					
 /*************************************************************************/
+
+* Loop over seven categories of spending and run model separately for each:
+* 1. Clean Electricity and Transmission
+* 2. Clean Transportation
+* 3. Buildings and Energy Efficiency
+* 4. Manufacturing 
+* 5. Environmental Justice
+* 6. Conservation and Agriculture
+* 7. Fossil Fuels
 
 foreach categorynum of numlist 1(1)7 {
 	
 	use ${workdir}/IRA_Climate_Spending_by_Industry_Category_`categorynum', clear
 	
+	* Construct vectors of spending on synthetic industries
+		
 	foreach year of numlist 2023(1)2032 {
 	
 		cap qui summ Spending`year' if beaiocodes == "BioenergyP"
@@ -187,6 +197,8 @@ foreach categorynum of numlist 1(1)7 {
 	
 }
 
+* Append results
+
 use ${outputdir}/IRA_Climate_Model_Run_Final_Results_Averages_Category_1, clear
 
 append using ${outputdir}/IRA_Climate_Model_Run_Final_Results_Averages_Category_2
@@ -200,6 +212,8 @@ gen CategoryNum = _n
 
 save ${outputdir}/IRA_Climate_Model_Run_Final_Results_Averages_by_Category, replace
 
+
+* Delete temporary files
 
 foreach year of numlist 2023(1)2032 {
 	foreach categorynum of numlist 1(1)7 {
