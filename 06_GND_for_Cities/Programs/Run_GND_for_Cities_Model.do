@@ -3,7 +3,7 @@
 *  PROJECT:    		GND for Cities Memo
 *  PROGRAMMER: 		Matt Mazewski
 *  PROGRAM NAME:   	Run_GND_for_Cities_Model.do
-*  LAST UPDATED: 	5/23/23
+*  LAST UPDATED: 	5/24/23
 *
 *  NOTES: 			Before running, be sure to change the working directory 
 *					at the top of this program
